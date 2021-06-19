@@ -1,36 +1,54 @@
 import moment from "moment";
 import React from "react";
-import { FaSpaceShuttle, FaSun, FaRegPaperPlane} from "react-icons/fa";
+import { FaSpaceShuttle, FaSun, FaRegPaperPlane } from "react-icons/fa";
 
 export const TaskDate = ({ setTaskDate, showTaskDate, setShowTaskDate }) =>
   showTaskDate && (
     <div className="task-date" data-testid="task-date-overlay">
       <ul className="task-date__list">
-        <li
-          onClick={() => {
-            setShowTaskDate(false);
-            setShowTaskDate(false);
-            setTaskDate(moment().format("DD/MM/YYYY"));
-          }}
-          date-testid="task-date-overlay"
-        >
-          <span>
-            <FaSpaceShuttle />
-          </span>
-          <span>Today</span>
+        <li date-testid="task-date-today">
+          <div
+            onClick={() => {
+              setShowTaskDate(false);
+              setShowTaskDate(false);
+              setTaskDate(moment().format("DD/MM/YYYY"));
+            }}
+            onKeyDown={() => {
+              setShowTaskDate(false);
+              setShowTaskDate(false);
+              setTaskDate(moment().format("DD/MM/YYYY"));
+            }}
+            tabIndex={0}
+            role="button"
+            aria-label="Select today as the task date"
+          >
+            <span>
+              <FaSpaceShuttle />
+            </span>
+            <span>Today</span>
+          </div>
         </li>
-        <li
-          onClick={() => {
-            setShowTaskDate(false);
-            setShowTaskDate(false);
-            setTaskDate(moment().add(1, "day").format("DD/MM/YYYY"));
-          }}
-          date-testid="task-date-tomorrow"
-        >
+        <li date-testid="task-date-tomorrow">
+          <div
+            onClick={() => {
+              setShowTaskDate(false);
+              setShowTaskDate(false);
+              setTaskDate(moment().add(1, "day").format("DD/MM/YYYY"));
+            }}
+            onKeyDown={() => {
+              setShowTaskDate(false);
+              setShowTaskDate(false);
+              setTaskDate(moment().add(1, "day").format("DD/MM/YYYY"));
+            }}
+            role="button"
+            tabIndex={0}
+            aria-label="Select tomorrow as the task date"
+          >
           <span>
             <FaSun />
           </span>
           <span>Tomorrow</span>
+          </div>
         </li>
         <li
           onClick={() => {
@@ -40,10 +58,26 @@ export const TaskDate = ({ setTaskDate, showTaskDate, setShowTaskDate }) =>
           }}
           date-testid="task-date-next-week"
         >
+          <div
+          onClick={() => {
+            setShowTaskDate(false);
+            setShowTaskDate(false);
+            setTaskDate(moment().add(7, "days").format("DD/MM/YYYY"));
+          }}
+          onKeyDown={() => {
+            setShowTaskDate(false);
+            setShowTaskDate(false);
+            setTaskDate(moment().add(7, "days").format("DD/MM/YYYY"));
+          }}
+          aria-label="Select next week as the task date"
+          tabIndex={0}
+          role="button"
+          >
           <span>
             <FaRegPaperPlane />
           </span>
           <span>Next week</span>
+          </div>
         </li>
       </ul>
     </div>
